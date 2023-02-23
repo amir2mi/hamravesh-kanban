@@ -8,7 +8,10 @@ export default function AntDesignConfigProvider({ children }: ProvidersProps) {
   return (
     <ConfigProvider
       theme={{
-        algorithm: theme === "light" ? antdThemes.defaultAlgorithm : antdThemes.darkAlgorithm,
+        algorithm: [
+          theme === "light" ? antdThemes.defaultAlgorithm : antdThemes.darkAlgorithm,
+          antdThemes.compactAlgorithm,
+        ],
         token: {
           colorPrimary: "#4c3faf",
         },
