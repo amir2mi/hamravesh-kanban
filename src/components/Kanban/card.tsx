@@ -6,6 +6,7 @@ import { faEllipsisVertical, faPenToSquare, faTrash } from "@fortawesome/free-so
 import { removeTodo, TodoItemProps } from "@store/todos";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
+import { setModalData } from "@store/modals";
 
 interface KanbanCardProps {
   children?: React.ReactNode;
@@ -48,7 +49,7 @@ export default function KanbanCard({ item, onMenuClick }: KanbanCardProps) {
       dispatch(removeTodo({ id, status: status }));
     }
     if (button.key === "edit") {
-      
+      dispatch(setModalData({ prop: "kanban", data: item }));
     }
   };
 

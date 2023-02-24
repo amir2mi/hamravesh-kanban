@@ -5,16 +5,17 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addTodo, editTodo } from "@store/todos";
 import type { TodoItemProps } from "@store/todos";
+import { useSelector } from "@store/utils";
 
 interface KanbanModalProps {
   children?: React.ReactNode;
   onClose?: () => void;
   open?: boolean;
-  item?: TodoItemProps;
 }
 
-export default function KanbanModal({ children, item, onClose }: KanbanModalProps) {
+export default function KanbanModal({ children, onClose }: KanbanModalProps) {
   const dispatch = useDispatch();
+  const { kanban: item } = useSelector((store) => store.modals);
   const [form] = Form.useForm();
   const type = Form.useWatch("type", form);
 
