@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface TodosStateProps {
   description?: string;
   id?: number | string;
-  status: "todo" | "inProgress" | "done";
-  title: string;
+  status?: "todo" | "inProgress" | "done";
+  title?: string;
   type: "easy" | "hard";
 }
 
@@ -102,10 +102,10 @@ const todosSlice = createSlice({
     addTodo: (state, action: PayloadAction<TodosStateProps>) => {
       const todo = action.payload;
       todo.id = Date.now();
-      state.push(todo);
+      state.unshift(todo);
     },
     editTodo: (state, action: PayloadAction<TodosStateProps>) => {
-      const filteredState = state.filter((todo) => (todo.id === action.payload.id ? action.payload : todo));
+      const filteredState = state.map((todo) => (todo.id === action.payload.id ? action.payload : todo));
       return filteredState;
     },
     reorderTodo: (state, action: PayloadAction<reorderTodoProps>) => {
