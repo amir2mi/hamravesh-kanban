@@ -23,28 +23,3 @@
     text-overflow: ellipsis;
   }
 }
-
-@keyframes slide-up {
-  0% {
-    transform: translateY(2rem);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.anim-slide-up {
-  animation: slide-up 0.25s ease-in-out both;
-}
-
-.anim-slide-up-delayed {
-  animation: slide-up 0.25s ease-in-out both;
-
-  @for $i from 0 to 20 {
-    &:nth-child(#{$i + 1}) {
-      animation-delay: #{$i * 200}ms;
-    }
-  }
-}
