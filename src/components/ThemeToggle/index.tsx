@@ -15,8 +15,8 @@ export default function ThemeToggle() {
   return (
     <Tooltip title={helperText}>
       <Button
-        ghost
         size="large"
+        ghost={isLight}
         type={isLight ? "primary" : "text"}
         className="flex items-center text-lg"
         aria-label={helperText}
