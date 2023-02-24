@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 
 interface KanbanCardProps extends TodoItemProps {
+  background: string;
   children?: React.ReactNode;
   onEdit?: (e: any) => void;
   onMenuClick?: (e: any) => void;
@@ -15,10 +16,7 @@ interface KanbanCardProps extends TodoItemProps {
 
 export default function KanbanCard(props: KanbanCardProps) {
   const dispatch = useDispatch();
-  const { useToken } = theme;
-  const { token } = useToken();
-
-  const { description, id, title, type, status, onMenuClick, onEdit } = props;
+  const { background, description, id, title, type, onMenuClick, onEdit } = props;
 
   const items: MenuProps["items"] = [
     {
@@ -33,19 +31,6 @@ export default function KanbanCard(props: KanbanCardProps) {
     },
   ];
 
-  const bgToken = useMemo(() => {
-    switch (status) {
-      case "todo":
-        return "colorInfoBg";
-      case "inProgress":
-        return "colorWarningBg";
-      case "done":
-        return "colorSuccessBg";
-      default:
-        return "colorInfoBg";
-    }
-  }, [status]);
-
   const handleOnClick = (button: any) => {
     if (button.key === "remove") {
       dispatch(removeTodo(id));
@@ -56,7 +41,7 @@ export default function KanbanCard(props: KanbanCardProps) {
   };
 
   return (
-    <Card style={{ background: token[bgToken] }} bodyStyle={{ padding: 15 }} className="group border-none">
+    <Card style={{ background }} bodyStyle={{ padding: 15 }} className="group border-none">
       <div className="mb-2 flex items-center justify-between">
         <div className="flex max-w-[calc(100%_-_2rem)] items-center gap-2">
           <Badge
