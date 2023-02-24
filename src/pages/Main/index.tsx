@@ -23,10 +23,6 @@ export default function MainPage() {
   const allItems = [...todos.todo, ...todos.inProgress, ...todos.done];
   const dndItems = allItems.map(({ id }, index) => id || index);
 
-  const handleOnItemEdit = (item: TodoItemProps) => {
-    setModalItem(item);
-  };
-
   const handleOnModalClose = () => {
     setModalItem(undefined);
   };
@@ -38,16 +34,14 @@ export default function MainPage() {
       const oldIndex = todos?.[fromStatus].findIndex(({ id }: TodoItemProps) => active.id === id);
       const toIndex = todos?.[toStatus].findIndex(({ id }: TodoItemProps) => over?.id === id);
 
-      if (fromStatus && toStatus && oldIndex && toIndex) {
-        dispatch(reorderTodo({ fromIndex: oldIndex, toIndex: toIndex, fromStatus, toStatus }));
-      }
+      dispatch(reorderTodo({ fromIndex: oldIndex, toIndex: toIndex, fromStatus, toStatus }));
     }
   };
 
   return (
     <Layout className="min-h-[100vh] overflow-x-hidden">
       <Header />
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 mb-4">
         <div className="item-center mt-10 flex justify-between">
           <h2 className="m-0 text-3xl font-bold">لیست تسک‌ها</h2>
           <Button
@@ -72,7 +66,7 @@ export default function MainPage() {
                   <div className="relative z-10 flex flex-col gap-4">
                     {todos.todo.map((item, index) => (
                       <SortableItem id={item?.id || index} key={item?.id || index} status="todo">
-                        <KanbanCard {...item} background={token.colorInfoBg} onEdit={handleOnItemEdit} />
+                        <KanbanCard item={item} background={token.colorInfoBg} onEdit={setModalItem} />
                       </SortableItem>
                     ))}
                   </div>
@@ -90,7 +84,7 @@ export default function MainPage() {
                   <div className="relative z-10 flex flex-col gap-4">
                     {todos.inProgress.map((item, index) => (
                       <SortableItem id={item?.id || index} key={item?.id || index} status="inProgress">
-                        <KanbanCard {...item} background={token.colorWarningBg} onEdit={handleOnItemEdit} />
+                        <KanbanCard item={item} background={token.colorWarningBg} onEdit={setModalItem} />
                       </SortableItem>
                     ))}
                   </div>
@@ -107,7 +101,7 @@ export default function MainPage() {
                   <div className="relative z-10 flex flex-col gap-4">
                     {todos.done.map((item, index) => (
                       <SortableItem id={item?.id || index} key={item?.id || index} status="done">
-                        <KanbanCard {...item} background={token.colorSuccessBg} onEdit={handleOnItemEdit} />
+                        <KanbanCard item={item} background={token.colorSuccessBg} onEdit={setModalItem} />
                       </SortableItem>
                     ))}
                   </div>

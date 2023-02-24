@@ -7,16 +7,18 @@ import { removeTodo, TodoItemProps } from "@store/todos";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 
-interface KanbanCardProps extends TodoItemProps {
+interface KanbanCardProps {
   background: string;
   children?: React.ReactNode;
+  item: TodoItemProps;
   onEdit?: (e: any) => void;
   onMenuClick?: (e: any) => void;
 }
 
 export default function KanbanCard(props: KanbanCardProps) {
   const dispatch = useDispatch();
-  const { background, description, id, title, type, onMenuClick, onEdit } = props;
+  const { background, item, onMenuClick, onEdit } = props;
+  const { description, id, title, type, status } = item;
 
   const items: MenuProps["items"] = [
     {
@@ -33,10 +35,10 @@ export default function KanbanCard(props: KanbanCardProps) {
 
   const handleOnClick = (button: any) => {
     if (button.key === "remove") {
-      dispatch(removeTodo(id));
+      dispatch(removeTodo({ id, status }));
     }
     if (button.key === "edit") {
-      onEdit?.(props);
+      onEdit?.(item);
     }
   };
 

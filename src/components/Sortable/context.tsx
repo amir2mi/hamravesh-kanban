@@ -1,5 +1,4 @@
 import {
-  closestCenter,
   closestCorners,
   DndContext,
   DragEndEvent,
