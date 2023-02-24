@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 interface KanbanCardProps extends TodosStateProps {
   children?: React.ReactNode;
+  onEdit?: (e: any) => void;
   onMenuClick?: (e: any) => void;
 }
 
@@ -17,7 +18,7 @@ export default function KanbanCard(props: KanbanCardProps) {
   const { useToken } = theme;
   const { token } = useToken();
 
-  const { description, id, title, type, status, onMenuClick } = props;
+  const { description, id, title, type, status, onMenuClick, onEdit } = props;
 
   const items: MenuProps["items"] = [
     {
@@ -40,14 +41,17 @@ export default function KanbanCard(props: KanbanCardProps) {
         return "colorWarningBg";
       case "done":
         return "colorSuccessBg";
+      default:
+        return "colorInfoBg";
     }
   }, [status]);
 
   const handleOnClick = (button: any) => {
-    console.log(button, button.key);
-
     if (button.key === "remove") {
       dispatch(removeTodo(id));
+    }
+    if (button.key === "edit") {
+      onEdit?.(props);
     }
   };
 
