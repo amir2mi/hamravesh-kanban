@@ -19,12 +19,7 @@ export default function KanbanModal({ children, onClose }: KanbanModalProps) {
   const [form] = Form.useForm();
   const type = Form.useWatch("type", form);
 
-  // it should be shown when it has data
-  const open = item && Object.keys(item).length > 0;
-  // it should be shown when it has data
-
   const isEdit = String(item?.id)?.length > 0;
-
   const actionLabel = isEdit ? "ویرایش" : "ایجاد";
 
   const types = [
@@ -48,10 +43,10 @@ export default function KanbanModal({ children, onClose }: KanbanModalProps) {
 
   useEffect(() => {
     form.setFieldsValue(item);
-  }, [open]);
+  }, [item]);
 
   return (
-    <Modal title={`${actionLabel} تسک`} open={open} footer={false} onOk={handleOnClose} onCancel={handleOnClose}>
+    <Modal title={`${actionLabel} تسک`} open={!!item} footer={false} onOk={handleOnClose} onCancel={handleOnClose}>
       <Form
         form={form}
         name="basic"
