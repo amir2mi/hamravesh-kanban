@@ -3,7 +3,7 @@ import KanbanCard from "@components/Kanban/card";
 import KanbanModal from "@components/Kanban/modal";
 import { faBarsProgress, faCheck, faList, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { reorderTodo, TodoItemProps } from "@store/todos";
+import { reorderTodo, TodoItemProps, TodosStatus } from "@store/todos";
 import { useSelector } from "@store/utils";
 import { Badge, Button, Card, Col, Layout, Row, theme } from "antd";
 import { useState } from "react";
@@ -11,14 +11,17 @@ import { useState } from "react";
 import { SortableItem } from "@components/Sortable/item";
 import { useDispatch } from "react-redux";
 import DragAndDropContext from "@components/Sortable/context";
+import { DragEndEvent } from "@dnd-kit/core";
 
 export default function MainPage() {
   const { useToken } = theme;
   const dispatch = useDispatch();
   const { todos } = useSelector((store) => store);
   const { token } = useToken();
-
   const [modalItem, setModalItem] = useState<TodoItemProps | undefined>();
+
+  const allItems = [...todos.todo, ...todos.inProgress, ...todos.done];
+  const dndItems = allItems.map(({ id }, index) => id || index);
 
   const handleOnItemEdit = (item: TodoItemProps) => {
     setModalItem(item);
@@ -28,19 +31,18 @@ export default function MainPage() {
     setModalItem(undefined);
   };
 
-  function handleDragEnd(event: any) {
-    const { active, over } = event;
+  const handleDragEnd = ({ active, over }: DragEndEvent) => {
+    if (active.id !== over?.id) {
+      const fromStatus: TodosStatus = active?.data?.current?.status;
+      const toStatus: TodosStatus = over?.data?.current?.status;
+      const oldIndex = todos?.[fromStatus].findIndex(({ id }: TodoItemProps) => active.id === id);
+      const toIndex = todos?.[toStatus].findIndex(({ id }: TodoItemProps) => over?.id === id);
 
-    if (active.id !== over.id) {
-      const fromStatus = active.data.current.status;
-      const toStatus = over.data.current.status;
-      const oldIndex = todos?.[fromStatus].findIndex(({ id }) => active.id === id);
-      const toIndex = todos?.[toStatus].findIndex(({ id }) => over.id === id);
-      dispatch(reorderTodo({ fromIndex: oldIndex, toIndex: toIndex, fromStatus, toStatus }));
+      if (fromStatus && toStatus && oldIndex && toIndex) {
+        dispatch(reorderTodo({ fromIndex: oldIndex, toIndex: toIndex, fromStatus, toStatus }));
+      }
     }
-  }
-
-  const allItems = [...todos.todo, ...todos.inProgress, ...todos.done];
+  };
 
   return (
     <Layout className="min-h-[100vh] overflow-x-hidden">
@@ -58,7 +60,7 @@ export default function MainPage() {
             ایجاد تسک
           </Button>
         </div>
-        <DragAndDropContext items={allItems.map(({ id }, index) => id || index)} onDragEnd={handleDragEnd}>
+        <DragAndDropContext items={dndItems} onDragEnd={handleDragEnd}>
           <Row gutter={[20, 20]} className="mt-12">
             <Col span={24} lg={8}>
               <Badge.Ribbon text={todos.todo?.length} color="blue">
@@ -114,7 +116,6 @@ export default function MainPage() {
             </Col>
           </Row>
         </DragAndDropContext>
-
         <KanbanModal onClose={handleOnModalClose} item={modalItem} />
       </div>
     </Layout>

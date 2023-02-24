@@ -2,6 +2,7 @@ import {
   closestCenter,
   closestCorners,
   DndContext,
+  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -9,7 +10,13 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
-export default function DragAndDropContext({ children, items, onDragEnd }) {
+interface DragAndDropContextProps {
+  children: React.ReactNode;
+  items: any[];
+  onDragEnd: (e: DragEndEvent) => void;
+}
+
+export default function DragAndDropContext({ children, items, onDragEnd }: DragAndDropContextProps) {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
