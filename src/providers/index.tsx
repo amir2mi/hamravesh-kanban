@@ -1,4 +1,4 @@
-import AntDesignConfigProvider from "@providers/antd";
+import UserInterfaceProvider from "@providers/userInterface";
 import StoreProvider from "@providers/store";
 
 export interface ProvidersProps {
@@ -8,7 +8,7 @@ export interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <StoreProvider>
-      <AntDesignConfigProvider>{children}</AntDesignConfigProvider>
+      <UserInterfaceProvider>{children}</UserInterfaceProvider>
     </StoreProvider>
   );
 }

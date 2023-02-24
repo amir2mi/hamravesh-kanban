@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface initialStateProps {
+export interface UserInterfaceStateProps {
   theme: "light" | "dark";
 }
 
-const initialState: initialStateProps = {
-  theme: "light",
+const initialState: UserInterfaceStateProps = {
+  theme: "dark",
 };
 
 const userInterfaceSlice = createSlice({
   name: "userInterface",
   initialState,
   reducers: {
-    changeTheme: (state, action: PayloadAction<initialStateProps["theme"]>) => {
+    changeTheme: (state, action: PayloadAction<UserInterfaceStateProps["theme"]>) => {
       state.theme = action.payload;
     },
   },
