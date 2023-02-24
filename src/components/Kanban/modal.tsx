@@ -4,13 +4,13 @@ import { Button, Form, Input, Modal, Select, Switch } from "antd";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addTodo, editTodo } from "@store/todos";
-import type { TodosStateProps } from "@store/todos";
+import type { TodoItemProps } from "@store/todos";
 
 interface KanbanModalProps {
   children?: React.ReactNode;
   onClose?: () => void;
   open?: boolean;
-  item?: TodosStateProps;
+  item?: TodoItemProps;
 }
 
 export default function KanbanModal({ children, item, onClose }: KanbanModalProps) {
@@ -21,6 +21,7 @@ export default function KanbanModal({ children, item, onClose }: KanbanModalProp
   // it should be shown when it has data
   const open = item && Object.keys(item).length > 0;
   // it should be shown when it has data
+
   const isEdit = item?.title?.length;
 
   const actionLabel = isEdit ? "ویرایش" : "ایجاد";
@@ -35,7 +36,7 @@ export default function KanbanModal({ children, item, onClose }: KanbanModalProp
     onClose?.();
   };
 
-  const handleOnFinish = (todo: TodosStateProps) => {
+  const handleOnFinish = (todo: TodoItemProps) => {
     if (isEdit) {
       dispatch(editTodo(todo));
     } else {
@@ -79,7 +80,7 @@ export default function KanbanModal({ children, item, onClose }: KanbanModalProp
         >
           <Input.TextArea
             size="large"
-            maxLength={150}
+            maxLength={120}
             disabled={type !== "hard"}
             showCount={type === "hard"}
             placeholder="مختصر توضیحی در مورد تسک"

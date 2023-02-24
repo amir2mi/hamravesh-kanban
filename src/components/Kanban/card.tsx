@@ -3,11 +3,11 @@ import { Badge, Button, Card, Dropdown, theme } from "antd";
 import type { MenuProps } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { removeTodo, TodosStateProps } from "@store/todos";
+import { removeTodo, TodoItemProps } from "@store/todos";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 
-interface KanbanCardProps extends TodosStateProps {
+interface KanbanCardProps extends TodoItemProps {
   children?: React.ReactNode;
   onEdit?: (e: any) => void;
   onMenuClick?: (e: any) => void;
@@ -56,11 +56,7 @@ export default function KanbanCard(props: KanbanCardProps) {
   };
 
   return (
-    <Card
-      style={{ background: token[bgToken] }}
-      bodyStyle={{ padding: 15 }}
-      className="anim-slide-up-delayed group border-none"
-    >
+    <Card style={{ background: token[bgToken] }} bodyStyle={{ padding: 15 }} className="group border-none">
       <div className="mb-2 flex items-center justify-between">
         <div className="flex max-w-[calc(100%_-_2rem)] items-center gap-2">
           <Badge
