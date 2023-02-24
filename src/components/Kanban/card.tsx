@@ -58,7 +58,7 @@ export default function KanbanCard(props: KanbanCardProps) {
       className="anim-slide-up-delayed group border-none"
     >
       <div className="mb-2 flex items-center justify-between">
-        <div className="flex max-w-[90%] items-center gap-2">
+        <div className="flex max-w-[calc(100%_-_2rem)] items-center gap-2">
           <Badge
             count={"‌"}
             size="small"
