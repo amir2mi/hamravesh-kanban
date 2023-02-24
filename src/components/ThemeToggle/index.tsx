@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "@store/utils";
 import { changeTheme } from "@store/userInterface";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,15 +9,21 @@ export default function ThemeToggle() {
   const dispatch = useDispatch();
   const { theme } = useSelector((store) => store.userInterface);
 
+  const isLight = theme === "light";
+  const helperText = `تغییر به حالت ${isLight ? "تاریک" : "روشن"}`;
+
   return (
-    <Button
-      size="large"
-      type="primary"
-      className="text-xl"
-      aria-label={`تغییر به حالت ${theme === "light" ? "تاریک" : "روشن"}`}
-      onClick={() => dispatch(changeTheme(theme === "light" ? "dark" : "light"))}
-    >
-      <FontAwesomeIcon icon={theme === "light" ? faSun : faMoon} />
-    </Button>
+    <Tooltip title={helperText}>
+      <Button
+        ghost
+        size="large"
+        type={isLight ? "primary" : "text"}
+        className="flex items-center text-lg"
+        aria-label={helperText}
+        onClick={() => dispatch(changeTheme(isLight ? "dark" : "light"))}
+      >
+        <FontAwesomeIcon icon={isLight ? faSun : faMoon} />
+      </Button>
+    </Tooltip>
   );
 }
