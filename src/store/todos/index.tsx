@@ -93,10 +93,10 @@ export type TodosStatus = "todo" | "inProgress" | "done";
 
 export interface TodoItemProps {
   description?: string;
-  id?: number | string;
-  title?: string;
-  type?: "easy" | "hard" | string;
-  status?: TodosStatus;
+  id: number | string;
+  title: string;
+  type: "easy" | "hard" | string;
+  status: TodosStatus;
 }
 
 interface ReorderTodoProps {
@@ -123,7 +123,6 @@ interface TodosStateProps {
 }
 
 const initialState: TodosStateProps = mockData as TodosStateProps;
-console.log(mockData);
 
 const todosSlice = createSlice({
   name: "todos",

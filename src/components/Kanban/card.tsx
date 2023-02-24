@@ -35,7 +35,7 @@ export default function KanbanCard(props: KanbanCardProps) {
 
   const handleOnClick = (button: any) => {
     if (button.key === "remove") {
-      dispatch(removeTodo({ id, status }));
+      dispatch(removeTodo({ id, status: status}));
     }
     if (button.key === "edit") {
       onEdit?.(item);

@@ -22,7 +22,7 @@ export default function KanbanModal({ children, item, onClose }: KanbanModalProp
   const open = item && Object.keys(item).length > 0;
   // it should be shown when it has data
 
-  const isEdit = item?.title?.length;
+  const isEdit = String(item?.id)?.length > 0;
 
   const actionLabel = isEdit ? "ویرایش" : "ایجاد";
 
@@ -38,7 +38,7 @@ export default function KanbanModal({ children, item, onClose }: KanbanModalProp
 
   const handleOnFinish = (todo: TodoItemProps) => {
     if (isEdit) {
-      dispatch(editTodo({ todo: { ...item, ...todo }, status: item?.status || "todo" }));
+      dispatch(editTodo({ todo: { ...item, ...todo }, status: item.status }));
     } else {
       dispatch(addTodo({ todo, status: "todo" }));
     }
@@ -85,9 +85,9 @@ export default function KanbanModal({ children, item, onClose }: KanbanModalProp
           />
         </Form.Item>
 
-        <div className="mt-8 flex items-center justify-end gap-4">
+        <div className="mt-8 flex items-center justify-end gap-2">
           <Form.Item className="m-0">
-            <Button htmlType="reset">پاکسازی اطلاعات</Button>
+            <Button htmlType="reset">پاکسازی</Button>
           </Form.Item>
           <Form.Item className="m-0">
             <Button type="primary" htmlType="submit">

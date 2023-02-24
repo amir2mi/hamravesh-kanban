@@ -41,7 +41,7 @@ export default function MainPage() {
   return (
     <Layout className="min-h-[100vh] overflow-x-hidden">
       <Header />
-      <div className="container mx-auto px-4 mb-4">
+      <div className="container mx-auto mb-4 px-4">
         <div className="item-center mt-10 flex justify-between">
           <h2 className="m-0 text-3xl font-bold">لیست تسک‌ها</h2>
           <Button
@@ -49,7 +49,7 @@ export default function MainPage() {
             size="large"
             className="flex items-center"
             icon={<FontAwesomeIcon icon={faPlus} className="ml-2" />}
-            onClick={() => setModalItem({ type: "easy" })}
+            onClick={() => setModalItem({ type: "easy", status: "todo", description: "", id: "", title: "" })}
           >
             ایجاد تسک
           </Button>
