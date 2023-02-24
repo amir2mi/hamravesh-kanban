@@ -1,3 +1,50 @@
 :root {
-  --theme-primary-accent: #4c3faf;
+  --theme-color__primary: #4c3faf;
+
+  &.light {
+    color: #282828;
+    background-color: #fff;
+  }
+
+  &.dark {
+    color: #eaeaed;
+    background-color: #121119;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.anim-slide-up {
+  animation: slide-up 0.25s ease-in-out both;
+}
+
+.anim-slide-up-delayed {
+  animation: slide-up 0.25s ease-in-out both;
+
+  @for $i from 0 to 20 {
+    &:nth-child(#{$i + 1}) {
+      animation-delay: #{$i * 200}ms;
+    }
+  }
 }
