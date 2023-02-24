@@ -1,5 +1,6 @@
-import UserInterfaceProvider from "@providers/userInterface";
+import AntDesignConfigProvider from "@providers/antd";
 import StoreProvider from "@providers/store";
+import ThemeProvider from "@providers/theme";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -8,7 +9,9 @@ export interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <StoreProvider>
-      <UserInterfaceProvider>{children}</UserInterfaceProvider>
+      <ThemeProvider>
+        <AntDesignConfigProvider>{children}</AntDesignConfigProvider>
+      </ThemeProvider>
     </StoreProvider>
   );
 }

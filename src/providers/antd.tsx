@@ -1,27 +1,14 @@
 import { ConfigProvider, theme as antdThemes } from "antd";
 import type { ProvidersProps } from "@providers";
 import { useSelector } from "@store/utils";
-import { useEffect } from "react";
 
-export default function UserInterfaceProvider({ children }: ProvidersProps) {
+export default function AntDesignConfigProvider({ children }: ProvidersProps) {
   const { theme } = useSelector((store) => store.userInterface);
   const isLight = theme === "light";
 
-  useEffect(() => {
-    let classesToAdd = [];
-    let classesToRemove = [];
-
-    if (isLight) {
-      classesToAdd = ["light"];
-      classesToRemove = ["dark"];
-    } else {
-      classesToAdd = ["dark"];
-      classesToRemove = ["light"];
-    }
-
-    document?.documentElement.classList.add(...classesToAdd);
-    document?.documentElement.classList.remove(...classesToRemove);
-  }, [theme]);
+  const validateMessages = {
+    required: "تکمیل ${label} الزامی است",
+  };
 
   return (
     <ConfigProvider
@@ -36,6 +23,7 @@ export default function UserInterfaceProvider({ children }: ProvidersProps) {
           colorBorderSecondary: isLight ? "#f0f0f0" : "transparent",
         },
       }}
+      form={{ validateMessages }}
     >
       {children}
     </ConfigProvider>
