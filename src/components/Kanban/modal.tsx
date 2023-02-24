@@ -38,7 +38,7 @@ export default function KanbanModal({ children, item, onClose }: KanbanModalProp
 
   const handleOnFinish = (todo: TodoItemProps) => {
     if (isEdit) {
-      dispatch(editTodo({ todo: { ...item, ...todo }, status: item.status }));
+      item?.status && dispatch(editTodo({ todo: { ...item, ...todo }, status: item.status }));
     } else {
       dispatch(addTodo({ todo, status: "todo" }));
     }
