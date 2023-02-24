@@ -1,4 +1,5 @@
 export default function LiveBackground() {
+  // to reduced CPU usage, animations are disabled
   return (
     <div className="fixed top-0 left-0 h-[100vh] w-[100vw] opacity-30">
       <span className="absolute -bottom-10 -right-10 h-52 w-52 rounded-full bg-pink-500" />
