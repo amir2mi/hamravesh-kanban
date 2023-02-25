@@ -48,7 +48,7 @@ export function SortableItem({ children, className, disableMovement, id, status,
           type="default"
           size="small"
           {...listeners}
-          className="absolute inset-y-0 -right-4 z-10 my-auto flex h-10 items-center opacity-0 group-focus-within:opacity-90 group-hover:opacity-90"
+          className="touch-none absolute inset-y-0 -right-4 z-10 my-auto flex h-10 items-center opacity-0 group-focus-within:opacity-90 group-hover:opacity-90"
         >
           <FontAwesomeIcon icon={faGripVertical} />
         </Button>
