@@ -1,8 +1,8 @@
+import { Badge, Card } from "antd";
 import { SortableItem } from "@components/Sortable/item";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TodoItemProps, TodosStatus } from "@store/todos";
-import { Badge, Card } from "antd";
 import KanbanCard from "./card";
 
 interface KanbanColumnProps {

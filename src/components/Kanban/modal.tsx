@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Form, Input, Modal, Select, Switch } from "antd";
+import { Button, Form, Input, Modal, Select } from "antd";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addTodo, editTodo } from "@store/todos";

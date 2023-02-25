@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Layout } from "antd";
 import Header from "@components/Header";
@@ -6,7 +5,6 @@ import KanbanModal from "@components/Kanban/modal";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setModalData } from "@store/modals";
-import { TodoItemProps } from "@store/todos";
 import KanbanColumns from "./columns";
 import LiveBackground from "@components/LiveBackground";
 

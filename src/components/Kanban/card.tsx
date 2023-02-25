@@ -1,12 +1,12 @@
-import { timeSince } from "@utils/date";
+import { useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { Badge, Button, Card, Dropdown, theme } from "antd";
-import type { MenuProps } from "antd";
+import { timeSince } from "@utils/date";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { removeTodo, TodoItemProps } from "@store/todos";
-import { useMemo } from "react";
-import { useDispatch } from "react-redux";
 import { setModalData } from "@store/modals";
+import type { MenuProps } from "antd";
 
 interface KanbanCardProps {
   children?: React.ReactNode;
