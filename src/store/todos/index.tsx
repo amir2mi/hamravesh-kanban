@@ -35,12 +35,12 @@ interface TodosStateProps {
   done: TodoItemProps[];
 }
 
-// const initialState: TodosStateProps = mockData as TodosStateProps;
-const initialState: TodosStateProps = {
-  todo: [],
-  inProgress: [],
-  done: [],
-};
+const initialState: TodosStateProps = mockData as TodosStateProps;
+// const initialState: TodosStateProps = {
+//   todo: [],
+//   inProgress: [],
+//   done: [],
+// };
 
 const todosSlice = createSlice({
   name: "todos",
