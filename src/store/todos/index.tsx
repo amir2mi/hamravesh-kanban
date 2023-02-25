@@ -1,93 +1,6 @@
 import { arrayMove } from "@dnd-kit/sortable";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-const mockData = {
-  todo: [
-    {
-      description: "",
-      id: 1577827861000,
-      title: "سراب ردپای تو",
-      type: "easy",
-      status: "todo",
-    },
-    {
-      description: "من به بن‌بست نرسیدم، راهمو کج کردم",
-      id: 1065887513000,
-      title: "آب را گل نکنیم",
-      type: "hard",
-      status: "todo",
-    },
-    {
-      description: "",
-      id: 1085415396000,
-      title: "تست کانبان هستم",
-      type: "easy",
-      status: "todo",
-    },
-    {
-      description: "",
-      id: 1161569583000,
-      title: "یاد من کن،‌ گاه گاهی",
-      type: "hard",
-      status: "todo",
-    },
-  ],
-  inProgress: [
-    {
-      description: "",
-      id: 1366021476000,
-      title: "با دو چشم اشک‌باری، یاد من کن",
-      type: "easy",
-      status: "inProgress",
-    },
-    {
-      description: "من به بن‌بست نرسیدم، راهمو کج کردم",
-      id: 958181155000,
-      title: "خانه بر دوشم",
-      type: "easy",
-      status: "inProgress",
-    },
-    {
-      description: "",
-      id: 1887345009000,
-      title: "ستاره، ستاره ای به شب نداره",
-      type: "hard",
-      status: "inProgress",
-    },
-    {
-      description: "",
-      id: 1226994526000,
-      title: "نظامی | خمسه | لیلی و مجنون | بخش ۱۲ - عاشق شدن لیلی و مجنون به یکدیگر",
-      type: "easy",
-      status: "inProgress",
-    },
-  ],
-  done: [
-    {
-      description: "",
-      id: 1633788030000,
-      title: "نظامی | خمسه | لیلی و مجنون | بخش ۴۱ - غزل خواندن مجنون نزد لیلی",
-      type: "easy",
-      status: "done",
-    },
-    {
-      description: "لیلی امید شهر بیقراره",
-      id: 1539376918000,
-      title: "زمستون به روی شب موندگاره...",
-      type: "hard",
-      status: "done",
-    },
-    {
-      description:
-        "انگشت کش سخن سرایان این قصه چنین برد به پایان کان سوخته خرمن زمانه شد خرمنی از سرشک دانه دستاس فلک شکست خردش چون خرد شکست باز بردش",
-      id: 1231037251000,
-      title:
-        "جامی | هفت اورنگ | لیلی و مجنون | بخش ۳۱ - ملاقات کردن مجنون با شبان لیلی و خبر یافتن که مردان قبیله لیلی به غارت بیرون رفته‌اند و پیش لیلی رفتن وی",
-      type: "hard",
-      status: "done",
-    },
-  ],
-};
+import mockData from "./mock.json";
 
 export type TodosStatus = "todo" | "inProgress" | "done";
 
@@ -122,7 +35,12 @@ interface TodosStateProps {
   done: TodoItemProps[];
 }
 
-const initialState: TodosStateProps = mockData as TodosStateProps;
+// const initialState: TodosStateProps = mockData as TodosStateProps;
+const initialState: TodosStateProps = {
+  todo: [],
+  inProgress: [],
+  done: [],
+};
 
 const todosSlice = createSlice({
   name: "todos",
