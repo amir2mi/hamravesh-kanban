@@ -3,8 +3,18 @@ import { CSS } from "@dnd-kit/utilities";
 import { faGripVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";
+import clsx from "clsx";
 
-export function SortableItem({ children, id, status }: any) {
+interface SortableItemProps {
+  children?: React.ReactNode;
+  className?: string;
+  disableMovement?: boolean;
+  hideButton?: boolean;
+  id: any;
+  status?: any;
+}
+
+export function SortableItem({ children, className, disableMovement, id, status, hideButton }: SortableItemProps) {
   const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
     id,
     data: { status },
@@ -27,15 +37,22 @@ export function SortableItem({ children, id, status }: any) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} className="group relative">
-      <Button
-        type="default"
-        size="small"
-        {...listeners}
-        className="absolute inset-y-0 -right-4 z-10 my-auto flex h-10 items-center opacity-0 group-focus-within:opacity-90 group-hover:opacity-90"
-      >
-        <FontAwesomeIcon icon={faGripVertical} />
-      </Button>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className={clsx("group relative", disableMovement && "transform-none", className)}
+    >
+      {!hideButton && (
+        <Button
+          type="default"
+          size="small"
+          {...listeners}
+          className="absolute inset-y-0 -right-4 z-10 my-auto flex h-10 items-center opacity-0 group-focus-within:opacity-90 group-hover:opacity-90"
+        >
+          <FontAwesomeIcon icon={faGripVertical} />
+        </Button>
+      )}
       {children}
     </div>
   );

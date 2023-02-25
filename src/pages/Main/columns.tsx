@@ -10,18 +10,24 @@ import DragAndDropContext from "@components/Sortable/context";
 export default function KanbanColumns() {
   const dispatch = useDispatch();
   const { todos } = useSelector((store) => store);
+  const { todo, inProgress, done } = todos;
 
-  const allItems = [...todos.todo, ...todos.inProgress, ...todos.done];
+  // if there is no todo, add initial todo with id of the status to activate context for dnd
+  const allItems = [
+    ...(todo?.length ? todo : [{ id: "todo" }]),
+    ...(inProgress?.length ? inProgress : [{ id: "inProgress" }]),
+    ...(done?.length ? done : [{ id: "done" }]),
+  ];
   const dndItems = allItems.map(({ id }, index) => id || index);
 
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id !== over?.id) {
       const fromStatus: TodosStatus = active?.data?.current?.status;
       const toStatus: TodosStatus = over?.data?.current?.status;
-      const oldIndex = todos?.[fromStatus].findIndex(({ id }: TodoItemProps) => active.id === id);
+      const fromIndex = todos?.[fromStatus].findIndex(({ id }: TodoItemProps) => active.id === id);
       const toIndex = todos?.[toStatus].findIndex(({ id }: TodoItemProps) => over?.id === id);
 
-      dispatch(reorderTodo({ fromIndex: oldIndex, toIndex: toIndex, fromStatus, toStatus }));
+      dispatch(reorderTodo({ fromIndex, toIndex, fromStatus, toStatus }));
     }
   };
 

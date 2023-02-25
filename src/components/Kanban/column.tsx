@@ -1,4 +1,4 @@
-import { Badge, Card } from "antd";
+import { Badge, Card, Empty } from "antd";
 import { SortableItem } from "@components/Sortable/item";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,12 +21,18 @@ export default function KanbanColumn({ color, icon, items, status, title }: Kanb
           <h3 className="m-0 text-2xl font-bold">{title}</h3>
           <FontAwesomeIcon icon={icon} className="text-2xl opacity-30" />
         </div>
-        <div className="relative z-10 flex flex-col gap-4">
-          {items.map((item, index) => (
-            <SortableItem id={item?.id || index} key={item?.id || index} status={status}>
-              <KanbanCard item={item} />
+        <div className="relative z-10 flex min-h-[50vh] flex-col gap-4">
+          {items?.length ? (
+            items.map((item, index) => (
+              <SortableItem id={item?.id || index} key={item?.id || index} status={status}>
+                <KanbanCard item={item} />
+              </SortableItem>
+            ))
+          ) : (
+            <SortableItem id={status} status={status} className="mt-10" hideButton disableMovement>
+              <Empty description="تسکی تعریف نشده" />
             </SortableItem>
-          ))}
+          )}
         </div>
       </Card>
     </Badge.Ribbon>
