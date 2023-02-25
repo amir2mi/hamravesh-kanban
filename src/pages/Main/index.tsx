@@ -29,7 +29,7 @@ export default function MainPage() {
         <Header />
         <div className="container mx-auto mb-4 px-4">
           <div className="item-center mt-10 flex justify-between">
-            <h2 className="m-0 text-3xl font-bold">لیست تسک‌ها</h2>
+            <h2 className="m-0 text-2xl font-bold lg:text-3xl">لیست تسک‌ها</h2>
             <Button
               type="primary"
               size="large"
